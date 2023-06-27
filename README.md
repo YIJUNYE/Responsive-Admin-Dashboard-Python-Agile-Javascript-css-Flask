@@ -2,10 +2,10 @@
 
 Compatibility/Tested:
 * Chrome, Firefox, IE 11+
-* Works best on screen sizes greater than ~335px
+* Works best on-screen sizes greater than ~335px
 
-[Bavbar screenshot]
-![Bavbar Image](dashboard.png)
+[Navbar screenshot]
+![Navbar Image](dashboard.png)
 
 [Dark Mode]
 ![Dark Image](dark.png)
