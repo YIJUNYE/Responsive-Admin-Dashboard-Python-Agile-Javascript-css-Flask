@@ -1,0 +1,50 @@
+{% extends "staff.html" %}
+{% block content %}
+<style>
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    h1 {
+        text-align: center;
+        color: black;
+    }
+
+    #chartContainer {
+      display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    }
+</style>
+
+<h1>Borrower Summary Report</h1>
+
+<div id="chartContainer">
+    <canvas id="hamburgChart"></canvas>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="/static/hamburgChart.js"></script>
+
+<table class="table border-primary table-hover">
+    <thead>
+        <tr>
+            <th scope="col">Borrower</th>
+            <th scope="col">Times of Loans</th>
+        </tr>
+    </thead>
+    <tbody class="table-group-divider">
+        {% for b in borrowersummary %}
+        <tr>
+            <td>{{ b[0] }}</td>
+            <td>{{ b[2] }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

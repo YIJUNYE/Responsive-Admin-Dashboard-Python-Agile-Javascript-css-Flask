@@ -1,0 +1,50 @@
+{% extends "staff.html" %}
+{% block content %}
+<!-- code in here to display a list of loans -->
+<!-- loanlist is the variable passed in containing list of loans -->
+<h1> Availability of Books
+    <style>h1 {
+        text-align: center;color: pink;
+    }</style>
+</h1>
+<!--use  bootstrap table formatting to get table hover -->
+<table class="table border-primary table-hover" >
+    <thead>
+        <tr>
+        
+          <th scope="col">Booktitle</th>
+          <th scope="col">Author</th>
+          <th scope="col">Format</th>
+          <th scope="col">Duedate</th>
+        </tr>
+      </thead>
+ <tbody class="table-group-divider">
+
+
+{% for book in searchbook %}
+
+
+
+    <td>{{book[1]}}</td>
+ 
+    <td>{{book[2]}}</td>
+    
+
+    <td>{{book[3]}}</td>
+
+    <!--use if statement to show Returned when the value is 1  and show On Loan when the value is 0  -->   
+    {% if book[6]== 1 %}
+  <td>Returned</td>
+  {% else %}
+  <td>{{book[5]}}</td>
+  {%endif%}
+   
+
+
+</tr>
+
+{%endfor%}
+</tbody>
+</table>
+
+{% endblock %}

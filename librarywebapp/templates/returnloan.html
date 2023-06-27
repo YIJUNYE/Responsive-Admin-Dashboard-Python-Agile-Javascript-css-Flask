@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width , initial-scale=1.0">
+  <title>Staff dashboard</title>
+  <link rel="stylesheet" href="/static/navbar.css">
+
+  <!-- iconscout css -->
+  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+  
+
+
+<script>
+
+    $(function() {
+      $(".toggle").on ("click", function(){
+          if ($(".item").hasClass("active")){
+            $(".item").removeClass("active");
+
+          }
+          else{
+            $(".item").addClass("active");
+          }
+      })
+    });
+
+</script>
+</head>
+                                                                                              
+<body>
+
+   <!--Navigation bar-->
+
+    <nav>
+      <div class="logo-name">
+          <div class="logo-image">
+              <img src="/static/logo.jpg" alt="">
+          </div>
+          <span class="logo_name">Lincoln Library</span>
+      </div>
+
+      <div class="menu-items">
+          <ul class="nav-links">
+              <li><a href="{{ url_for('staff') }}">
+                  <i class="uil uil-estate"></i>
+                  <span class="link-name">Home</span>
+              </a></li>
+              <li><a href="{{ url_for('borroweradd') }}">
+                  <i class="uil uil-files-landscapes"></i>
+                  <span class="link-name">Add Borrower</span>
+              </a></li>
+              <li><a href="{{ url_for('loanbook') }}">
+                  <i class="uil uil-chart"></i>
+                  <span class="link-name">Issuebook</span>
+              </a></li>
+              <li><a href="{{ url_for('returnbook') }}">
+                  <i class="uil uil-thumbs-up"></i>
+                  <span class="link-name">Returnbook</span>
+              </a></li>
+              <li><a href="#">
+                  <i class="uil uil-comments"></i>
+                  <span class="link-name">Report</span>
+              </a></li>
+              
+          </ul>
+          
+          <ul class="logout-mode">
+              <li><a href="#">
+                  <i class="uil uil-signout"></i>
+                  <span class="link-name">Logout</span>
+              </a></li>
+
+              <li class="mode">
+                  <a href="#">
+                      <i class="uil uil-moon"></i>
+                  <span class="link-name">Dark Mode</span>
+              </a>
+
+              <div class="mode-toggle">
+                <span class="switch"></span>
+              </div>
+          </li>
+          </ul>
+      </div>
+  </nav>
+
+  <div class="container2">
+    <header>Return loan</header>
+      <form id="returnloan" name="returnloan" action="/loan/return" method="post">
+  
+        <div class="dropdown-content"> 
+          <label for="book">Select books from the list and return!</label>
+            <!--use "form-control" to make sure the data from the form then pass to the server  -->
+            <!--set name to "book" to match python "def addloan()" -->
+            <select name="returnloan" id="returnloan" class="form-control"  required="required">
+
+              <!--use for loop to get data from database -->
+            {%for x in loanbook%} 
+        
+              <!--get the first item from database using "[]"-->
+          
+            <option value="{{x[0]}}"> {{x[9]}} * {{x[7]}}</option>
+            {%endfor%}
+          </select>
+        </div>
+  
+        <!-- define a hidden input and update loaddate to the current date when submit -->
+        <input type="hidden" id="loandate" name="loandate" value="{{ loandate }}">
+  
+        <!-- submission (action) of form data to /loan/add -->
+        <div class="buttons">
+            <input type="submit" value="Submit">
+        </div>
+
+      </form>
+  </div>
+
+<section class="content">
+
+  <header>
+    {% block header %}{% endblock %}
+  </header>
+ 
+  {% for message in get_flashed_messages() %}
+    <div class="flash">{{ message }}</div>
+  {% endfor %}
+  {% block content %}{% endblock %}
+</section>
+
+<!-- JavaScript Bundle with Popper -->
+
+<script src="/static/nav.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+</body>
+
+
+</html>

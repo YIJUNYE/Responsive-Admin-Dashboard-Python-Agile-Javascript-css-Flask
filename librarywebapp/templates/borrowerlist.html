@@ -1,0 +1,141 @@
+{% extends "staff.html" %}
+{% block content %}
+<!-- style the page using <style> statement , centerd all the texts and then color them -->
+  <head>
+ <style>
+        body {
+   text-align: center; background-size: cover
+  }
+
+table {
+  width:30%;
+  border-collapse: collapse;
+  border: 2px solid;
+}
+
+th {
+  height: 70px;
+  text-align: left;
+  padding: 15px;
+}
+td {
+  height: 70px;
+  text-align: left;
+  padding: 15px;
+}
+input {
+  width: 40%;
+  display: inline;
+   float: none;
+   margin:0px 0px 0px 0px;
+   width: 260px;
+   padding: 2px 4px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: 2px solid;
+  border-radius: 4px;
+}
+input[type=reset] {
+  background-color: grey;
+  border: none;
+  color: white;
+  padding: 2px 4px;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;
+  width:50px;
+}
+input[type=submit] {
+  background-color: lightgreen;
+  border: none;
+  color: white;
+  padding: 2px 4px;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;
+  width:50px;
+}
+
+    </style></head>
+ 
+  
+
+<h1>List of borrowers</h1>
+
+<!--use bootstrap class statement to modify table -->
+<table class="table border-primary table-hover" >
+    <thead>
+        <tr>
+              <!--set up table head row using scope statement -->
+          <th scope="col">First Name</th>
+          <th scope="col">Last Name</th>
+          <th scope="col">Date Of Birth</th>
+          <th scope="col">House Number Name</th>
+          <th scope="col">Street</th>
+          <th scope="col">Town</th>
+          <th scope="col">City</th>
+          <th scope="col">Postalcode</th>
+        </tr>
+      </thead>
+
+    <!--use bootstrap class statement to modify table format -->
+ <tbody class="table-group-divider">
+
+  {% for x in search %}
+  
+  <tr>
+    <td>{{x[1]}}</td> 
+    <td>{{x[2]}}</td>
+    <td>{{x[3]}}</td>
+    <td>{{x[4]}}</td>
+    <td>{{x[5]}}</td>
+    <td>{{x[6]}}</td>
+    <td>{{x[7]}}</td>
+    <td>{{x[8]}}</td></tr>
+
+  {%endfor%}
+</tbody>
+</table>
+
+
+<body>
+<form action="/borrower/edit" method="POST">
+  <fieldset>
+    <legend>Edit borrower information:</legend><br>
+    {%for x in search%} 
+    <label for="Edit firstname">Please enter firstname</label><br>
+    <input type="text" id="firstname" name="firstname" value="{{x[1]}}"><br>
+
+    <label for="add familyname">Please enter familyname</label><br>
+    <input type="text" id="familyname" name="familyname" value="{{x[2]}}" ><br>
+
+    <label for="add dateofbirth">Please enter dateofbirth</label><br>
+    <input type="date" id="dateofbirth" name="dateofbirth" value="{{x[3]}}" ><br>
+
+    <label for="add housenumbername">Please enter housenumbername</label><br>
+    <input type="text" id="housenumbername" name="housenumbername" value="{{x[4]}}" ><br>
+
+    <label for="add street">Please enter street</label><br>
+    <input type="text" id="street" name="street" value="{{x[5]}}" ><br>
+
+    <label for="add town">Please enter town</label><br>
+    <input type="text" id="town" name="town" value="{{x[6]}}"><br>
+
+    <label for="add city">Please enter city</label><br>
+    <input type="text" id="city" name="city" value="{{x[7]}}"><br>
+
+    <label for="add postalcode">Please enter postalcode</label><br>
+    <input type="number" id="postalcode" name="postalcode" value="{{x[8]}}"><br>
+
+    <input type="hidden" id="borrowerid" name="borrowerid" value="{{x[0]}}">
+
+    <input type="submit" value="Edit">
+    <input type="reset" value="Reset"><br><br>
+    {%endfor%}
+
+
+  </fieldset>
+</form>
+
+</body>
+{% endblock %}
